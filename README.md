@@ -1,7 +1,7 @@
 
-  # Redesign Portfolio Website
+ Portfolio Website
 
-  This is a code bundle for Redesign Portfolio Website. The original project is available at https://www.figma.com/design/yK696nCWxMEECF2KbRQhs0/Redesign-Portfolio-Website.
+  Yhis is my portfolio for IoT/backend engineer, highlighting my experience so far.
 
   ## Running the code
 
