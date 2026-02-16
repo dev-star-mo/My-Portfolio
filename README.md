@@ -1,7 +1,7 @@
 
  Portfolio Website
 
-  Yhis is my portfolio for IoT/backend engineer, highlighting my experience so far.
+  This is my portfolio for IoT/backend engineer, highlighting my experience so far.
 
   ## Running the code
 
