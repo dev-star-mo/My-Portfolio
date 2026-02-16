@@ -5,14 +5,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "mosesmuuo@gmail.com",
-    href: "mailto:mosesmuuo@gmail.com"
+    value: "muuomose@gmail.com",
+    href: "mailto:muuomose@gmail.com"
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+254 712 345 678",
-    href: "tel:+254712345678"
+    value: "+254707057174",
+    href: "tel:+254707057174"
   },
   {
     icon: MapPin,
@@ -32,7 +32,7 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "https://linkedin.com/in/moses-muuo",
+    href: "https://www.linkedin.com/in/moses-muuo-25915118b",
     username: "Moses Muuo"
   }
 ];
@@ -49,7 +49,7 @@ export function ContactTab() {
         <h2 className="text-3xl md:text-4xl font-bold mb-3">Let's Connect</h2>
         <div className="w-16 h-1 bg-primary mb-8"></div>
         <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-          I'm always interested in hearing about new opportunities, collaborations, 
+          I'm always interested in hearing about new opportunities, collaborations,
           or just having a chat about IoT and backend development. Feel free to reach out!
         </p>
       </motion.section>
@@ -64,7 +64,7 @@ export function ContactTab() {
         >
           Contact Information
         </motion.h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {contactInfo.map((info, index) => (
             <motion.div
@@ -104,7 +104,7 @@ export function ContactTab() {
         >
           Connect on Social Media
         </motion.h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {socialLinks.map((social, index) => (
             <motion.a
@@ -142,11 +142,11 @@ export function ContactTab() {
       >
         <h3 className="text-2xl font-bold mb-4">Ready to start a project?</h3>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Whether you need IoT solutions, backend development, or consultation on your next project, 
+          Whether you need IoT solutions, backend development, or consultation on your next project,
           I'm here to help bring your ideas to life.
         </p>
         <motion.a
-          href="mailto:mosesmuuo@gmail.com"
+          href="mailto:muuomose@gmail.com"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:shadow-lg transition-shadow"

@@ -3,6 +3,8 @@ import { Sidebar } from "./components/Sidebar";
 import { HomeTab } from "./components/HomeTab";
 import { AboutTab } from "./components/AboutTab";
 import { ExperienceTab } from "./components/ExperienceTab";
+import { ProjectsTab } from "./components/ProjectsTab";
+import { CertificationsTab } from "./components/CertificationsTab";
 import { ContactTab } from "./components/ContactTab";
 import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
@@ -19,6 +21,10 @@ export default function App() {
         return <AboutTab />;
       case "experience":
         return <ExperienceTab />;
+      case "projects":
+        return <ProjectsTab />;
+      case "certifications":
+        return <CertificationsTab />;
       case "contact":
         return <ContactTab />;
       default:
@@ -28,22 +34,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Sidebar 
-        activeTab={activeTab} 
+      <Sidebar
+        activeTab={activeTab}
         setActiveTab={setActiveTab}
         isOpen={isSidebarOpen}
         setIsOpen={setIsSidebarOpen}
       />
-      
+
       {/* Menu Toggle Button */}
       <motion.button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className="fixed top-6 z-50 size-12 rounded-lg bg-card border border-border flex items-center justify-center hover:bg-muted transition-all shadow-lg hover:shadow-xl"
-        animate={{ 
+        animate={{
           left: isSidebarOpen ? '17rem' : '1.5rem',
           rotate: isSidebarOpen ? 90 : 0
         }}
-        transition={{ 
+        transition={{
           duration: 0.3,
           ease: "easeInOut"
         }}
@@ -51,7 +57,7 @@ export default function App() {
         whileTap={{ scale: 0.95 }}
       >
         <motion.div
-          animate={{ 
+          animate={{
             rotate: isSidebarOpen ? 180 : 0,
             scale: isSidebarOpen ? 0.9 : 1
           }}
@@ -65,7 +71,7 @@ export default function App() {
         </motion.div>
       </motion.button>
 
-      <main 
+      <main
         className="min-h-screen p-12 transition-all duration-300"
         style={{ marginLeft: isSidebarOpen ? '16rem' : '0' }}
       >

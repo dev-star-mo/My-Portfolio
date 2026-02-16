@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Home, User, Briefcase, Mail } from "lucide-react";
+import { Home, User, Briefcase, Mail, FolderGit2, Award } from "lucide-react";
 import profileImage from "@/assets/fd368df85e6222ad53e93a39fee71989489c4af6.png";
 
 interface SidebarProps {
@@ -14,6 +14,8 @@ export function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen }: SidebarP
     { id: "home", label: "Home", icon: Home },
     { id: "about", label: "About Me", icon: User },
     { id: "experience", label: "Experience", icon: Briefcase },
+    { id: "projects", label: "Projects", icon: FolderGit2 },
+    { id: "certifications", label: "Certifications", icon: Award },
     { id: "contact", label: "Contact", icon: Mail },
   ];
 
@@ -36,7 +38,7 @@ export function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen }: SidebarP
           />
         </div>
         <h2 className="text-xl font-semibold text-center mb-1">Moses Muuo</h2>
-        <p className="text-sm text-muted-foreground text-center">Backend/IoT Engineer</p>
+        <p className="text-sm text-muted-foreground text-center">IoT/Backend Engineer</p>
       </div>
 
       <nav className="flex-1 p-6">
@@ -52,8 +54,8 @@ export function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen }: SidebarP
                   }
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activeTab === item.id
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
               >
                 <item.icon className="size-5" />

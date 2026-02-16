@@ -3,6 +3,21 @@ import { Code2, Cpu, Database, Network, Wrench, FileCode } from "lucide-react";
 
 const services = [
   {
+    icon: Cpu,
+    title: "IoT Development",
+    skills: [
+      "LoRaWAN design and deployment",
+      "Firmware development (ESP-IDF)",
+      "Interfacing communication technologies such as IIC, SPI, UART, RS485, BLE, among others",
+      "NB-IoT",
+      "FreeRTOS",
+      "Node.js development in Node-RED",
+      "PCB development",
+      "Assembly language programming",
+      "Linux administration"
+    ]
+  },
+  {
     icon: Code2,
     title: "Backend Development",
     skills: [
@@ -17,18 +32,6 @@ const services = [
       "Troubleshooting",
       "Documentation",
       "ERPNext development"
-    ]
-  },
-  {
-    icon: Cpu,
-    title: "IoT Development",
-    skills: [
-      "LoRaWAN design and deployment",
-      "NB-IoT",
-      "FreeRTOS",
-      "Node.js development in Node-RED",
-      "Firmware development (ESP-IDF)",
-      "PCB development"
     ]
   }
 ];
@@ -73,7 +76,7 @@ export function HomeTab() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Backend/IoT Engineer
+            IoT/Backend Engineer
           </motion.p>
           <motion.p
             className="text-lg text-muted-foreground max-w-3xl leading-relaxed"
@@ -81,7 +84,7 @@ export function HomeTab() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            I am a backend/IoT developer with over 2 years of experience developing end-to-end IoT solutions across 20+ sites, and the data pipelines to process the data from over 300 sensors to display the data on dashboards for data-driven decisions.
+            I am an IoT/backend engineer with over 2 years of professional experience developing end-to-end IoT and backend solutions to problems I see around me. Whether in the cooporate place or personal projects, I seek to tackle challenges by developing working solutions that the users will find truly useful.
           </motion.p>
         </div>
       </motion.section>

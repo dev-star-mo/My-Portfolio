@@ -13,7 +13,7 @@ export function AboutTab() {
         <h2 className="text-3xl md:text-4xl font-bold mb-3">About Me</h2>
         <div className="w-16 h-1 bg-primary mb-8"></div>
         <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl">
-          I am a backend/IoT developer with over 2 years of experience developing end-to-end IoT solutions across 20+ sites, and the data pipelines to process the data from over 300 sensors to display the data on dashboards for data-driven decisions.
+          I am an IoT/backend engineer with over 2 years of professional experience developing end-to-end IoT and backend solutions to problems I see around me. Whether in the cooporate place or personal projects, I seek to tackle challenges by developing working solutions that the users will find truly useful.
         </p>
       </motion.section>
 
