@@ -29,17 +29,17 @@ export function SectionHeading({
       )}
     >
       <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-primary uppercase">
-        {index && <span>{`${index} // `}</span>}
+        {index && <span>{`${index} / `}</span>}
         {eyebrow}
       </p>
       <h2
         id={id}
-        className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
+        className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]"
       >
         {title}
       </h2>
       {description && (
-        <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-muted-foreground">
           {description}
         </p>
       )}

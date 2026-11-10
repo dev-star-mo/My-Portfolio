@@ -1,4 +1,4 @@
-import type { AnomalyDataPoint, TelemetryChannel } from '@/types/portfolio';
+import type { AnomalyDataPoint, ArchitectureNode, TelemetryChannel } from '@/types/portfolio';
 
 /*
  * All values in this module are synthetic and deterministic (no Math.random),
@@ -183,3 +183,111 @@ export function toleranceBand(baseline: number): [number, number] {
   const delta = Math.max(baseline * ANOMALY_TOLERANCE, ANOMALY_MIN_BAND_LPM);
   return [round(Math.max(baseline - delta, 0), 1), round(baseline + delta, 1)];
 }
+
+/* ------------------------------------------------------------------------ */
+/* Representative edge-to-cloud reference pipeline                          */
+/* ------------------------------------------------------------------------ */
+
+export const ARCHITECTURE_DISCLOSURE =
+  'Representative edge-to-cloud reference architecture. Specific protocols and cloud components vary across individual LoRaWAN, NB-IoT, and BLE deployments.';
+
+export const architectureNodes: ArchitectureNode[] = [
+  {
+    id: 'sensor-node',
+    stepNumber: '01',
+    title: 'Sensor Node',
+    shortLabel: 'Sensor',
+    category: 'iot',
+    purpose:
+      'Measures the physical world at the edge (tank level, flow, temperature, soil, water quality) and packages readings into compact uplink payloads.',
+    protocolsAndTech: ['STM32 / ESP32 (ESP-IDF)', 'Ultrasonic, flow & pH/EC probes', 'RS485-Modbus', 'I2C / SPI / UART', 'TinyML (edge inference)'],
+    dataIn: 'Analog and digital sensor signals, Modbus registers, microphone audio for edge classification.',
+    dataOut: 'Small binary uplink payloads with readings, battery level and status flags on a fixed reporting interval or on threshold events.',
+    failureAndReliabilityNotes:
+      'Battery-powered nodes sleep between uplinks; thresholds can trigger out-of-schedule alerts. Sensor drift and fouling are handled with calibration and plausibility checks downstream.',
+  },
+  {
+    id: 'gateway',
+    stepNumber: '02',
+    title: 'LoRaWAN / NB-IoT Gateway',
+    shortLabel: 'Gateway',
+    category: 'iot',
+    purpose:
+      'Provides the long-range radio link from field devices to the internet. LoRaWAN uses a site gateway; NB-IoT devices connect directly through the mobile operator network.',
+    protocolsAndTech: ['LoRaWAN', 'NB-IoT (Safaricom)', 'BLE (short range)', 'Raspberry Pi + LoRaWAN HAT (mobile gateway)', 'Cellular / Ethernet backhaul'],
+    dataIn: 'LoRa radio frames or NB-IoT datagrams from devices in range.',
+    dataOut: 'Forwarded radio packets with signal metadata (RSSI, SNR) over IP backhaul.',
+    failureAndReliabilityNotes:
+      'Gateway placement and antenna height drive coverage. Mobile gateways buffer data while offline and offload it once connectivity returns.',
+  },
+  {
+    id: 'network-server',
+    stepNumber: '03',
+    title: 'Network Server',
+    shortLabel: 'Network server',
+    category: 'iot',
+    purpose:
+      'Authenticates devices, de-duplicates packets heard by multiple gateways, manages device sessions and data rates, and hands decrypted application payloads to integrations.',
+    protocolsAndTech: ['LoRaWAN network server', 'OTAA device activation', 'Adaptive data rate (ADR)', 'Downlink scheduling'],
+    dataIn: 'Raw uplinks forwarded by one or more gateways.',
+    dataOut: 'De-duplicated, decrypted application payloads per device, plus downlink commands back to devices.',
+    failureAndReliabilityNotes:
+      'Frame counters and de-duplication protect against replays and duplicates. Device registration and keys are managed here, never in frontend code.',
+  },
+  {
+    id: 'broker',
+    stepNumber: '04',
+    title: 'MQTT / UDP Broker',
+    shortLabel: 'Broker',
+    category: 'backend',
+    purpose:
+      'Decouples devices and network servers from application services by delivering messages to subscribers on device topics or UDP endpoints.',
+    protocolsAndTech: ['MQTT topics', 'UDP listeners', 'JSON / binary payloads'],
+    dataIn: 'Application payloads from the network server, and UDP packets from NB-IoT devices and GPS/GPRS trackers.',
+    dataOut: 'Per-device message streams delivered to the processing backend.',
+    failureAndReliabilityNotes:
+      'Subscribers can reconnect and resume consuming. UDP is connectionless, so the backend validates and acknowledges packets where the device supports it.',
+  },
+  {
+    id: 'backend',
+    stepNumber: '05',
+    title: 'Node-RED / FastAPI Backend',
+    shortLabel: 'Backend',
+    category: 'backend',
+    purpose:
+      'Decodes payloads into engineering units, applies business rules and alert thresholds, controls actuators, and exposes APIs to dashboards and ERP systems.',
+    protocolsAndTech: ['Node.js', 'Node-RED', 'FastAPI (Python)', 'SMS alerting', 'Frappe / ERPNext APIs'],
+    dataIn: 'Raw device messages from the broker.',
+    dataOut: 'Validated readings, SMS threshold alerts, pump control commands and ERP records.',
+    failureAndReliabilityNotes:
+      'Decoders reject malformed or out-of-range payloads. Alert rules use thresholds and durations to avoid noisy notifications; actuator commands such as pump on/off are tied to tank-level state.',
+  },
+  {
+    id: 'database',
+    stepNumber: '06',
+    title: 'PostgreSQL / Time-Series DB',
+    shortLabel: 'Database',
+    category: 'backend',
+    purpose:
+      'Stores the readings history so dashboards can show real-time and historical views and analysts can query trends across sites.',
+    protocolsAndTech: ['PostgreSQL', 'Time-series tables', 'SQL', 'Indexes on device + timestamp'],
+    dataIn: 'Validated, timestamped readings and alert events from the backend.',
+    dataOut: 'Query results for dashboards, reports and analytics models.',
+    failureAndReliabilityNotes:
+      'Timestamps and device identifiers make writes idempotent so retried messages do not double-count. Retention and aggregation keep long histories fast to query.',
+  },
+  {
+    id: 'dashboard-bi',
+    stepNumber: '07',
+    title: 'Operational Dashboard & BI',
+    shortLabel: 'Dashboard & BI',
+    category: 'analytics',
+    purpose:
+      'Turns readings into decisions: live operational views for site teams, plus reporting on usage, anomalies and KPIs for management and donors.',
+    protocolsAndTech: ['Node.js dashboards', 'React', 'SQL', 'Power BI', 'Python for data analytics'],
+    dataIn: 'Current and historical readings, alerts and ERP context.',
+    dataOut: 'Dashboards, KPI reports, anomaly flags such as night-flow leaks, and exportable summaries.',
+    failureAndReliabilityNotes:
+      'Stale-data indicators show when a device has stopped reporting, so a quiet chart is never mistaken for a normal one.',
+  },
+];

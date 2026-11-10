@@ -44,21 +44,21 @@ function Sparkline({ values, label }: { values: number[]; label: string }) {
     >
       <defs>
         <linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="var(--accent-cyan)" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="var(--accent-cyan)" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--signal-on-dark)" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="var(--signal-on-dark)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <polygon points={`0,${height} ${line} ${width},${height}`} fill={`url(#${gradientId})`} />
       <polyline
         points={line}
         fill="none"
-        stroke="var(--accent-cyan)"
+        stroke="var(--signal-on-dark)"
         strokeWidth="1.5"
         strokeLinejoin="round"
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
-      <circle cx={lastX} cy={lastY} r="2.5" fill="var(--accent-cyan)" />
+      <circle cx={lastX} cy={lastY} r="2.5" fill="var(--signal-on-dark)" />
     </svg>
   );
 }
@@ -71,9 +71,9 @@ function ChannelRow({ channel }: { channel: TelemetryChannel }) {
   const max = Math.max(...values).toFixed(decimals);
 
   return (
-    <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3 lg:py-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_auto]">
+    <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_auto] lg:py-2.5">
       <div className="flex min-w-0 items-center gap-3">
-        <span className="grid size-8 shrink-0 place-items-center rounded-md bg-navy text-accent-cyan">
+        <span className="grid size-8 shrink-0 place-items-center rounded-md bg-navy text-signal">
           <Icon className="size-4" aria-hidden="true" />
         </span>
         <div className="min-w-0">
@@ -123,30 +123,30 @@ export function TelemetryDemo({ className }: { className?: string }) {
     <section
       aria-labelledby={titleId}
       className={cn(
-        "rounded-xl border border-navy-border bg-navy-elevated/90 p-4 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.6)] sm:p-5",
+        "rounded-xl border border-navy-border bg-navy-elevated p-4 sm:p-5",
         className,
       )}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="inline-flex items-center rounded-sm border border-status-amber/50 bg-status-amber/10 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.12em] text-status-amber">
+          <p className="inline-flex items-center rounded-sm border border-status-amber/40 bg-status-amber/10 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.12em] text-status-amber">
             SIMULATED DEMO · SAMPLE TELEMETRY
           </p>
-          <h3 id={titleId} className="mt-2 text-base font-semibold text-on-dark">
+          <h3 id={titleId} className="font-display mt-2 text-base font-semibold text-on-dark">
             Edge sensor stream
           </h3>
         </div>
         <button
           type="button"
           onClick={() => setUserPaused(!paused)}
-          className="inline-flex h-9 items-center gap-2 rounded-md border border-navy-border px-3 text-xs font-medium text-on-dark transition-colors hover:border-accent-cyan/60 hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy-elevated"
+          className="inline-flex h-9 items-center gap-2 rounded-md border border-navy-border px-3 text-xs font-medium text-on-dark transition-colors hover:border-signal/50 hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-navy-elevated"
         >
           {paused ? (
             <Play className="size-3.5" aria-hidden="true" />
           ) : (
             <Pause className="size-3.5" aria-hidden="true" />
           )}
-          {paused ? "Resume sample stream" : "Pause sample stream"}
+          {paused ? "Resume" : "Pause"}
         </button>
       </div>
 
@@ -164,7 +164,7 @@ export function TelemetryDemo({ className }: { className?: string }) {
               aria-hidden="true"
               className={cn(
                 "size-1.5 shrink-0 rounded-full",
-                paused ? "bg-status-amber" : "bg-accent-teal motion-safe:animate-pulse",
+                paused ? "bg-status-amber" : "bg-signal motion-safe:animate-pulse",
               )}
             />
             {paused ? "Paused" : "Replaying"}

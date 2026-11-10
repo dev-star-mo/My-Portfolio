@@ -14,7 +14,7 @@ import {
 import { cn } from "../ui/utils";
 
 const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 function useActiveSection(ids: SectionId[]) {
   const [active, setActive] = useState<SectionId>(ids[0]);
@@ -53,23 +53,28 @@ function focusSection(id: SectionId) {
 const sectionIds = navItems.map((item) => item.id);
 
 export function SiteHeader() {
-  const active = useActiveSection(sectionIds);
+  const observed = useActiveSection(sectionIds);
+  const [manualActive, setManualActive] = useState<SectionId | null>(null);
+  const active = manualActive ?? observed;
   const [menuOpen, setMenuOpen] = useState(false);
   const pendingTarget = useRef<SectionId | null>(null);
 
+  useEffect(() => {
+    setManualActive(null);
+  }, [observed]);
+
   const handleMobileNav = (event: MouseEvent<HTMLAnchorElement>, id: SectionId) => {
-    // Scroll only after the Sheet unmounts and releases its body scroll lock.
     event.preventDefault();
     pendingTarget.current = id;
     setMenuOpen(false);
   };
 
   return (
-    <header className="surface-dark sticky top-0 z-40 border-b border-navy-border bg-navy/95 backdrop-blur supports-[backdrop-filter]:bg-navy/85">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
       <a
         href="#main-content"
         className={cn(
-          "sr-only rounded-md bg-accent-cyan px-4 py-2 text-sm font-semibold text-navy focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-50",
+          "sr-only rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-50",
           focusRing,
         )}
       >
@@ -84,20 +89,22 @@ export function SiteHeader() {
         >
           <span
             aria-hidden="true"
-            className="grid size-9 shrink-0 place-items-center rounded-md border border-accent-cyan/40 bg-navy-elevated font-mono text-sm font-semibold text-accent-cyan transition-colors group-hover:border-accent-cyan"
+            className="grid size-9 shrink-0 place-items-center rounded-md bg-primary font-display text-sm font-bold tracking-tight text-primary-foreground"
           >
             MM
           </span>
           <span className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-sm font-semibold text-on-dark">{profile.name}</span>
-            <span className="hidden truncate font-mono text-[11px] tracking-wide text-on-dark-muted sm:block">
+            <span className="font-display truncate text-sm font-semibold tracking-tight text-foreground">
+              {profile.name}
+            </span>
+            <span className="hidden truncate font-mono text-[11px] tracking-wide text-muted-foreground sm:block">
               IoT · Backend · Data
             </span>
           </span>
         </a>
 
         <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5">
             {navItems.map((item) => {
               const isActive = active === item.id;
               return (
@@ -105,9 +112,10 @@ export function SiteHeader() {
                   <a
                     href={`#${item.id}`}
                     aria-current={isActive ? "location" : undefined}
+                    onClick={() => setManualActive(item.id)}
                     className={cn(
                       "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                      isActive ? "text-on-dark" : "text-on-dark-muted hover:text-on-dark",
+                      isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                       focusRing,
                     )}
                   >
@@ -115,7 +123,7 @@ export function SiteHeader() {
                     <span
                       aria-hidden="true"
                       className={cn(
-                        "absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-accent-cyan transition-opacity",
+                        "absolute inset-x-3 -bottom-px h-0.5 bg-primary transition-opacity",
                         isActive ? "opacity-100" : "opacity-0",
                       )}
                     />
@@ -130,7 +138,7 @@ export function SiteHeader() {
           <a
             href="#contact"
             className={cn(
-              "hidden h-9 items-center rounded-md bg-accent-cyan px-4 text-sm font-semibold text-navy transition-colors hover:bg-accent-cyan/90 sm:inline-flex lg:hidden xl:inline-flex",
+              "hidden h-9 items-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:inline-flex lg:hidden xl:inline-flex",
               focusRing,
             )}
           >
@@ -140,7 +148,7 @@ export function SiteHeader() {
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger
               className={cn(
-                "inline-flex size-10 items-center justify-center rounded-md border border-navy-border text-on-dark transition-colors hover:bg-navy-elevated lg:hidden",
+                "inline-flex size-10 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-muted lg:hidden",
                 focusRing,
               )}
               aria-label="Open navigation menu"
@@ -149,7 +157,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="surface-dark w-[85vw] max-w-xs gap-0 border-navy-border p-0 [&>button:last-child]:text-on-dark"
+              className="w-[85vw] max-w-xs gap-0 border-border bg-background p-0"
               onCloseAutoFocus={(event) => {
                 const id = pendingTarget.current;
                 if (!id) return;
@@ -158,9 +166,9 @@ export function SiteHeader() {
                 focusSection(id);
               }}
             >
-              <SheetHeader className="border-b border-navy-border p-5">
-                <SheetTitle className="text-on-dark">{profile.name}</SheetTitle>
-                <SheetDescription className="font-mono text-xs text-on-dark-muted">
+              <SheetHeader className="border-b border-border p-5">
+                <SheetTitle className="font-display">{profile.name}</SheetTitle>
+                <SheetDescription className="font-mono text-xs">
                   {profile.roles.join(" · ")}
                 </SheetDescription>
               </SheetHeader>
@@ -177,8 +185,8 @@ export function SiteHeader() {
                           className={cn(
                             "flex min-h-11 items-center gap-3 rounded-md px-3 text-base font-medium transition-colors",
                             isActive
-                              ? "bg-navy-elevated text-on-dark"
-                              : "text-on-dark-muted hover:bg-navy-elevated/60 hover:text-on-dark",
+                              ? "bg-muted text-foreground"
+                              : "text-muted-foreground hover:bg-muted/70 hover:text-foreground",
                             focusRing,
                           )}
                         >
@@ -186,7 +194,7 @@ export function SiteHeader() {
                             aria-hidden="true"
                             className={cn(
                               "font-mono text-xs",
-                              isActive ? "text-accent-cyan" : "text-on-dark-muted/70",
+                              isActive ? "text-primary" : "text-muted-foreground/70",
                             )}
                           >
                             {String(index + 1).padStart(2, "0")}
@@ -198,11 +206,11 @@ export function SiteHeader() {
                   })}
                 </ul>
               </nav>
-              <div className="border-t border-navy-border p-5">
+              <div className="border-t border-border p-5">
                 <a
                   href={profile.contact[0].href}
                   className={cn(
-                    "flex h-11 items-center justify-center rounded-md bg-accent-cyan text-sm font-semibold text-navy transition-colors hover:bg-accent-cyan/90",
+                    "flex h-11 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90",
                     focusRing,
                   )}
                 >

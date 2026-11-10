@@ -26,11 +26,11 @@ const ranges: { id: AnomalyRange; label: string; description: string }[] = [
   { id: "7d", label: "7d", description: "3-hourly samples over 7 days" },
 ];
 
-const AMBER = "#F0A34A";
-const CYAN = "#17C3D1";
-const TEAL = "#20B89A";
-const AXIS = "#9FB0C3";
-const GRID = "#2A3F5A";
+const PRIMARY = "#0B7A6A";
+const TEAL = "#1F9D84";
+const AMBER = "#C47A1A";
+const AXIS = "#5A645E";
+const GRID = "#D5DDD6";
 
 interface ChartRow {
   timestamp: string;
@@ -44,15 +44,15 @@ function ChartTooltip({ active, payload }: TooltipProps<number, string>) {
   if (!active || !payload?.length) return null;
   const row = payload[0].payload as ChartRow;
   return (
-    <div className="rounded-md border border-navy-border bg-navy px-3 py-2 font-mono text-[11px] text-on-dark shadow-lg">
-      <p className="mb-1 text-on-dark-muted">{row.timestamp}</p>
+    <div className="rounded-md border border-border bg-card px-3 py-2 font-mono text-[11px] text-foreground shadow-sm">
+      <p className="mb-1 text-muted-foreground">{row.timestamp}</p>
       <p>
-        <span className="text-accent-cyan">Flow</span> {row.flow.toFixed(1)} L/min
+        <span className="text-primary">Flow</span> {row.flow.toFixed(1)} L/min
       </p>
       <p>
         <span className="text-accent-teal">Expected</span> {row.baseline.toFixed(1)} L/min
       </p>
-      {row.isAnomaly && <p className="mt-1 font-semibold text-status-amber">Flagged anomaly</p>}
+      {row.isAnomaly && <p className="mt-1 font-semibold text-amber-ink">Flagged anomaly</p>}
     </div>
   );
 }
@@ -82,24 +82,21 @@ export function AnomalyChart({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby={titleId}
-      className={cn(
-        "rounded-xl border border-navy-border bg-navy-elevated/90 p-4 shadow-[0_20px_50px_-20px_rgb(0_0_0/0.6)] sm:p-5",
-        className,
-      )}
+      className={cn("rounded-xl border border-border bg-card p-4 sm:p-5", className)}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="inline-flex items-center rounded-sm border border-status-amber/50 bg-status-amber/10 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.12em] text-status-amber">
+          <p className="inline-flex items-center rounded-sm border border-status-amber/40 bg-status-amber/10 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.12em] text-amber-ink">
             SYNTHETIC SAMPLE DATA
           </p>
-          <h3 id={titleId} className="mt-2 text-base font-semibold text-on-dark">
+          <h3 id={titleId} className="font-display mt-2 text-base font-semibold text-foreground">
             Night-flow anomaly check
           </h3>
         </div>
         <div
           role="group"
           aria-label="Sample time range"
-          className="inline-flex rounded-md border border-navy-border p-0.5"
+          className="inline-flex rounded-md border border-border p-0.5"
         >
           {ranges.map((r) => (
             <button
@@ -108,10 +105,10 @@ export function AnomalyChart({ className }: { className?: string }) {
               aria-pressed={range === r.id}
               onClick={() => setRange(r.id)}
               className={cn(
-                "h-8 min-w-11 rounded-[5px] px-3 font-mono text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan",
+                "h-8 min-w-11 rounded-[5px] px-3 font-mono text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                 range === r.id
-                  ? "bg-accent-cyan text-navy"
-                  : "text-on-dark-muted hover:text-on-dark",
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {r.label}
@@ -121,7 +118,7 @@ export function AnomalyChart({ className }: { className?: string }) {
       </div>
 
       <figure className="mt-4" aria-describedby={summaryId}>
-        <div className="h-48 w-full sm:h-52 lg:h-40" aria-hidden="true">
+        <div className="h-52 w-full sm:h-56" aria-hidden="true">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart data={rows} margin={{ top: 8, right: 8, bottom: 0, left: -18 }}>
               <CartesianGrid stroke={GRID} strokeDasharray="3 3" vertical={false} />
@@ -141,16 +138,13 @@ export function AnomalyChart({ className }: { className?: string }) {
                 width={44}
                 domain={[0, "auto"]}
               />
-              <Tooltip
-                content={<ChartTooltip />}
-                cursor={{ stroke: GRID, strokeWidth: 1 }}
-              />
+              <Tooltip content={<ChartTooltip />} cursor={{ stroke: GRID, strokeWidth: 1 }} />
               <Area
                 dataKey="band"
                 type="monotone"
                 stroke="none"
                 fill={TEAL}
-                fillOpacity={0.14}
+                fillOpacity={0.12}
                 isAnimationActive={!prefersReducedMotion}
                 activeDot={false}
               />
@@ -167,10 +161,10 @@ export function AnomalyChart({ className }: { className?: string }) {
               <Line
                 dataKey="flow"
                 type="monotone"
-                stroke={CYAN}
+                stroke={PRIMARY}
                 strokeWidth={2}
                 dot={false}
-                activeDot={{ r: 3, fill: CYAN, stroke: "none" }}
+                activeDot={{ r: 3, fill: PRIMARY, stroke: "none" }}
                 isAnimationActive={!prefersReducedMotion}
               />
               {anomaly && (
@@ -179,7 +173,7 @@ export function AnomalyChart({ className }: { className?: string }) {
                   y={anomaly.flow}
                   r={6}
                   fill={AMBER}
-                  stroke="#101B2D"
+                  stroke="#FFFFFF"
                   strokeWidth={2}
                   ifOverflow="extendDomain"
                 />
@@ -189,11 +183,11 @@ export function AnomalyChart({ className }: { className?: string }) {
         </div>
 
         <ul
-          className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] text-on-dark-muted"
+          className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[10px] text-muted-foreground"
           aria-label="Chart legend"
         >
           <li className="flex items-center gap-1.5">
-            <span aria-hidden="true" className="h-0.5 w-4 rounded-full bg-accent-cyan" />
+            <span aria-hidden="true" className="h-0.5 w-4 bg-primary" />
             Measured flow (L/min)
           </li>
           <li className="flex items-center gap-1.5">
@@ -201,8 +195,8 @@ export function AnomalyChart({ className }: { className?: string }) {
             Expected baseline
           </li>
           <li className="flex items-center gap-1.5">
-            <span aria-hidden="true" className="h-2.5 w-4 rounded-[2px] bg-accent-teal/25" />
-            ±{tolerancePct}% band
+            <span aria-hidden="true" className="h-2.5 w-4 rounded-[2px] bg-accent-teal/25" />±
+            {tolerancePct}% band
           </li>
           <li className="flex items-center gap-1.5">
             <span aria-hidden="true" className="size-2.5 rounded-full bg-status-amber" />
@@ -210,19 +204,18 @@ export function AnomalyChart({ className }: { className?: string }) {
           </li>
         </ul>
 
-        <figcaption id={summaryId} className="mt-3 text-xs leading-relaxed text-on-dark-muted">
+        <figcaption id={summaryId} className="mt-3 text-xs leading-relaxed text-muted-foreground">
           Example anomaly highlighted in synthetic sample telemetry ({activeRange.description}).
           Each reading is compared with an expected demand baseline; values outside a ±
           {tolerancePct}% band (minimum ±{ANOMALY_MIN_BAND_LPM} L/min) are flagged.
           {anomaly && (
             <>
               {" "}
-              At <span className="font-mono text-status-amber">{anomaly.timestamp}</span> the flow
-              reads <span className="font-mono text-on-dark">{anomaly.flow.toFixed(1)} L/min</span>{" "}
+              At <span className="font-mono text-amber-ink">{anomaly.timestamp}</span> the flow
+              reads <span className="font-mono text-foreground">{anomaly.flow.toFixed(1)} L/min</span>{" "}
               against an expected{" "}
-              <span className="font-mono text-on-dark">{anomaly.baseline.toFixed(1)} L/min</span>
-              , the pattern a leak or unmetered draw-off produces when demand should be near
-              zero.
+              <span className="font-mono text-foreground">{anomaly.baseline.toFixed(1)} L/min</span>
+              —the pattern a leak or unmetered draw-off produces when demand should be near zero.
             </>
           )}
         </figcaption>

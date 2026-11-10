@@ -3,60 +3,60 @@
 :root {
   --font-size: 16px;
 
-  /* Hybrid dark/light palette — dark technical zones */
-  --surface-navy: #101b2d;
-  --surface-navy-elevated: #1c2c40;
-  --surface-navy-border: #2a3f5a;
-  --text-on-dark: #f3f6fa;
-  --text-on-dark-muted: #9fb0c3;
-  --accent-cyan: #17c3d1;
-  --accent-teal: #20b89a;
-  --status-amber: #f0a34a;
+  /* Field Systems Editorial — ink graphite for Architecture / Contact only */
+  --surface-navy: #171c1a;
+  --surface-navy-elevated: #222926;
+  --surface-navy-border: #334039;
+  --text-on-dark: #f4f6f4;
+  --text-on-dark-muted: #a3b0a8;
+  --accent-cyan: #0b7a6a;
+  --accent-teal: #1f9d84;
+  --status-amber: #c47a1a;
+  --status-amber-ink: #7a4a0c;
 
-  /* Light editorial surfaces (default) */
-  --background: #f3f6fa;
-  --foreground: #263548;
+  /* Light editorial default */
+  --background: #f6f7f5;
+  --foreground: #141816;
   --card: #ffffff;
-  --card-foreground: #263548;
+  --card-foreground: #141816;
   --popover: #ffffff;
-  --popover-foreground: #263548;
-  --primary: #0f6b78;
+  --popover-foreground: #141816;
+  --primary: #0b7a6a;
   --primary-foreground: #ffffff;
-  --secondary: #e5ecf3;
-  --secondary-foreground: #263548;
-  --muted: #e5ecf3;
-  --muted-foreground: #5b6b7c;
-  --accent: #e5ecf3;
-  --accent-foreground: #263548;
+  --secondary: #e8ece8;
+  --secondary-foreground: #141816;
+  --muted: #e8ece8;
+  --muted-foreground: #5a645e;
+  --accent: #e8ece8;
+  --accent-foreground: #141816;
   --destructive: #c62f45;
   --destructive-foreground: #ffffff;
-  --border: #d8e2ed;
+  --border: #d5ddd6;
   --input: transparent;
   --input-background: #ffffff;
-  --switch-background: #c3cfdc;
+  --switch-background: #c5cec7;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #17c3d1;
-  --chart-1: #17c3d1;
-  --chart-2: #20b89a;
-  --chart-3: #0f6b78;
-  --chart-4: #f0a34a;
-  --chart-5: #5b6b7c;
-  --radius: 0.625rem;
+  --ring: #0b7a6a;
+  --chart-1: #0b7a6a;
+  --chart-2: #1f9d84;
+  --chart-3: #245c52;
+  --chart-4: #c47a1a;
+  --chart-5: #5a645e;
+  --radius: 0.5rem;
   --sidebar: #ffffff;
-  --sidebar-foreground: #263548;
-  --sidebar-primary: #0f6b78;
+  --sidebar-foreground: #141816;
+  --sidebar-primary: #0b7a6a;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e5ecf3;
-  --sidebar-accent-foreground: #263548;
-  --sidebar-border: #d8e2ed;
-  --sidebar-ring: #17c3d1;
+  --sidebar-accent: #e8ece8;
+  --sidebar-accent-foreground: #141816;
+  --sidebar-border: #d5ddd6;
+  --sidebar-ring: #0b7a6a;
+
+  /* Bright accent for dark surfaces (readable on graphite) */
+  --signal-on-dark: #3dcfb6;
 }
 
-/*
- * Dark navy technical zones (Hero, Architecture, Contact/Footer, Header).
- * Remaps the semantic tokens so ui/ primitives render correctly inside.
- */
 .surface-dark,
 .dark {
   --background: var(--surface-navy);
@@ -65,7 +65,7 @@
   --card-foreground: var(--text-on-dark);
   --popover: var(--surface-navy-elevated);
   --popover-foreground: var(--text-on-dark);
-  --primary: var(--accent-cyan);
+  --primary: var(--signal-on-dark);
   --primary-foreground: var(--surface-navy);
   --secondary: var(--surface-navy-elevated);
   --secondary-foreground: var(--text-on-dark);
@@ -76,12 +76,13 @@
   --border: var(--surface-navy-border);
   --input: var(--surface-navy-border);
   --input-background: var(--surface-navy-elevated);
-  --ring: var(--accent-cyan);
+  --ring: var(--signal-on-dark);
 }
 
 @theme inline {
   --font-sans: var(--font-family-sans);
   --font-mono: var(--font-family-mono);
+  --font-display: var(--font-family-display);
 
   --color-navy: var(--surface-navy);
   --color-navy-elevated: var(--surface-navy-elevated);
@@ -91,6 +92,8 @@
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-teal: var(--accent-teal);
   --color-status-amber: var(--status-amber);
+  --color-amber-ink: var(--status-amber-ink);
+  --color-signal: var(--signal-on-dark);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -154,44 +157,40 @@
   }
 
   ::selection {
-    background-color: rgb(23 195 209 / 0.3);
+    background-color: rgb(11 122 106 / 0.22);
   }
-
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
 
   h1,
   h2,
   h3,
   h4 {
-    letter-spacing: -0.015em;
+    font-family: var(--font-family-display);
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
 
   h1 {
     font-size: var(--text-2xl);
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.05;
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
   }
 
   h3 {
     font-size: var(--text-lg);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   h4 {
     font-size: var(--text-base);
     font-weight: 600;
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   label {
@@ -233,14 +232,28 @@
   }
 }
 
-/* Low-contrast engineering grid, used only on dark navy surfaces. */
+/* Soft paper grain — light atmosphere without looking like a dashboard. */
+@utility paper-grain {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgb(11 122 106 / 0.08), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgb(36 92 82 / 0.06), transparent 50%),
+    linear-gradient(rgb(20 24 22 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(20 24 22 / 0.03) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+}
+
 @utility tech-grid {
   background-image:
-    linear-gradient(rgb(23 195 209 / 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(23 195 209 / 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgb(61 207 182 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(61 207 182 / 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 @utility container-page {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility font-display {
+  font-family: var(--font-family-display);
 }

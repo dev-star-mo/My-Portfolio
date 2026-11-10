@@ -9,7 +9,7 @@ const socialIcons: Record<SocialLink["id"], typeof Github> = {
 };
 
 const linkClass =
-  "rounded-sm text-sm text-on-dark-muted transition-colors hover:text-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-navy";
+  "rounded-sm text-sm text-on-dark-muted transition-colors hover:text-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-navy";
 
 export function SiteFooter() {
   const email = profile.contact.find((item) => item.id === "email");
@@ -19,7 +19,7 @@ export function SiteFooter() {
     <footer className="surface-dark border-t border-navy-border">
       <div className="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr] md:py-14">
         <div>
-          <p className="text-base font-semibold text-on-dark">{profile.name}</p>
+          <p className="font-display text-base font-semibold text-on-dark">{profile.name}</p>
           <p className="mt-1 font-mono text-xs tracking-wide text-on-dark-muted">
             {profile.roles.join(" · ")}
           </p>
@@ -29,7 +29,7 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Footer">
-          <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-accent-cyan uppercase">
+          <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-signal uppercase">
             Sections
           </p>
           <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
@@ -44,7 +44,7 @@ export function SiteFooter() {
         </nav>
 
         <div>
-          <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-accent-cyan uppercase">
+          <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-signal uppercase">
             Connect
           </p>
           <ul className="space-y-2">
@@ -80,7 +80,7 @@ export function SiteFooter() {
       <div className="border-t border-navy-border">
         <div className="container-page flex flex-col gap-2 py-5 text-xs text-on-dark-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {profile.name}. All rights reserved.
+            © {year} {profile.name}
           </p>
           <p className="font-mono">{profile.location}</p>
         </div>

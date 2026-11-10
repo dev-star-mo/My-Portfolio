@@ -3,12 +3,14 @@ import { Section } from "./components/layout/Section";
 import { SectionHeading } from "./components/layout/SectionHeading";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteHeader } from "./components/layout/SiteHeader";
+import { ArchitectureSection } from "./components/sections/ArchitectureSection";
 import { CapabilityStrip } from "./components/sections/CapabilityStrip";
+import { FeaturedProjectsSection } from "./components/sections/FeaturedProjectsSection";
 import { HeroSection } from "./components/sections/HeroSection";
 
 function PhasePlaceholder({ phase, children }: { phase: number; children: string }) {
   return (
-    <div className="flex min-h-40 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-card/40 px-6 py-10 text-center">
+    <div className="flex min-h-32 flex-col items-start justify-center gap-2 border-t border-dashed border-border pt-8">
       <span className="font-mono text-xs tracking-[0.18em] text-primary uppercase">
         Phase {phase}
       </span>
@@ -29,29 +31,11 @@ interface PlaceholderSection {
 
 const placeholderSections: PlaceholderSection[] = [
   {
-    id: "projects",
-    index: "01",
-    eyebrow: "Projects",
-    title: "Featured work",
-    tone: "light",
-    phase: 3,
-    note: "Typed project catalogue with IoT, Software & Backend and Data Analytics filters, plus the In Progress & Concept Lab.",
-  },
-  {
-    id: "architecture",
-    index: "02",
-    eyebrow: "Architecture",
-    title: "Edge-to-cloud pipeline",
-    tone: "dark",
-    phase: 3,
-    note: "Interactive 7-node representative reference architecture explorer.",
-  },
-  {
     id: "experience",
     index: "03",
     eyebrow: "Experience",
     title: "Experience & deployments",
-    tone: "light",
+    tone: "white",
     phase: 4,
     note: "Upande Limited role summary, five deployment case studies and four R&D highlights.",
   },
@@ -60,7 +44,7 @@ const placeholderSections: PlaceholderSection[] = [
     index: "04",
     eyebrow: "Certifications",
     title: "Certifications",
-    tone: "white",
+    tone: "light",
     phase: 4,
     note: "IoT Development, Software & Backend and Data Analytics (including Ke Data Lab).",
   },
@@ -69,7 +53,7 @@ const placeholderSections: PlaceholderSection[] = [
     index: "05",
     eyebrow: "About",
     title: "About & education",
-    tone: "light",
+    tone: "white",
     phase: 4,
     note: "Engineering narrative, portrait and JKUAT education card.",
   },
@@ -92,13 +76,14 @@ export default function App() {
       <main id="main-content" tabIndex={-1} className="outline-none">
         <HeroSection />
         <CapabilityStrip />
+        <FeaturedProjectsSection />
+        <ArchitectureSection />
 
         {placeholderSections.map((section) => (
           <Section
             key={section.id}
             id={section.id}
             tone={section.tone}
-            grid={section.id === "architecture"}
             labelledBy={`${section.id}-title`}
           >
             <SectionHeading
