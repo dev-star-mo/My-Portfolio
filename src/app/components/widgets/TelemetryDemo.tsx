@@ -123,7 +123,7 @@ export function TelemetryDemo({ className }: { className?: string }) {
     <section
       aria-labelledby={titleId}
       className={cn(
-        "rounded-xl border border-navy-border bg-navy-elevated p-4 sm:p-5",
+        "surface-dark rounded-xl border border-navy-border bg-navy-elevated p-4 sm:p-5",
         className,
       )}
     >

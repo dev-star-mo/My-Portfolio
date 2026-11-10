@@ -111,6 +111,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
               )}
             >
               View case study
+              <span className="sr-only">: {project.title}</span>
               <ArrowRight className="size-4" aria-hidden="true" />
             </button>
             {project.links?.liveDemo && (
@@ -125,6 +126,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
               >
                 <ExternalLink className="size-4" aria-hidden="true" />
                 Live dashboard
+                <span className="sr-only">(opens in a new tab)</span>
               </a>
             )}
             {project.links?.github && (
@@ -132,7 +134,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Source on GitHub"
+                aria-label={`${project.title} source on GitHub (opens in a new tab)`}
                 className={cn(
                   "inline-flex size-11 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                   focusRing,

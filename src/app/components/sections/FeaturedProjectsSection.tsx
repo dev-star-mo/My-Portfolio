@@ -67,10 +67,11 @@ export function FeaturedProjectsSection() {
             <TabsTrigger
               key={f.id}
               value={f.id}
+              aria-label={`${f.label}, ${projectsFor(f.id).length} projects`}
               className="h-9 rounded-md border border-transparent px-3 text-sm text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none data-[state=active]:border-border data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-none"
             >
               {f.label}
-              <span className="ml-1.5 font-mono text-[11px] opacity-60">
+              <span className="ml-1.5 font-mono text-[11px] opacity-60" aria-hidden="true">
                 {projectsFor(f.id).length}
               </span>
             </TabsTrigger>

@@ -77,6 +77,8 @@
   --input: var(--surface-navy-border);
   --input-background: var(--surface-navy-elevated);
   --ring: var(--signal-on-dark);
+  /* Brighter amber on graphite so badge text clears WCAG AA (≥4.5:1) */
+  --status-amber: #e0a04a;
 }
 
 @theme inline {
@@ -144,11 +146,13 @@
     font-size: var(--font-size);
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   .surface-dark {
