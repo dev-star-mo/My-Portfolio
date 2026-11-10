@@ -7,6 +7,10 @@ export const profile: Profile = {
     'I build connected systems, develop the software behind them, and turn operational data into useful insights.',
   shortBio:
     'IoT and backend engineer with over 2 years of professional experience developing end-to-end IoT and backend solutions. Whether in a corporate environment or on personal projects, I tackle challenges by building working solutions that users find genuinely useful.',
+  aboutNarrative: [
+    'I work across the connected-systems stack: sensor hardware and firmware at the edge, Node.js and Python services that ingest and route telemetry, and the SQL and Power BI workflows that turn operational data into decisions people can act on.',
+    'At Upande Limited I designed and shipped LoRaWAN and NB-IoT deployments across 20+ sites—cold rooms, schools, WaSH programmes, greenhouses, and water utilities—while building the dashboards and ERP integrations field teams actually use. Whether in a corporate environment or on personal projects, I focus on working solutions that hold up outside the lab.',
+  ],
   location: 'Nairobi, Kenya',
   yearsExperience: '2+',
   contact: [

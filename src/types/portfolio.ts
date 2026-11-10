@@ -145,6 +145,8 @@ export interface Profile {
   roles: string[];
   coreMessage: string;
   shortBio: string;
+  /** Distinct from hero copy — used only in AboutSection. */
+  aboutNarrative: string[];
   location: string;
   yearsExperience: string;
   contact: ContactMethod[];
