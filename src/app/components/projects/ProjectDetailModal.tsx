@@ -150,7 +150,7 @@ export function ProjectDetailModal({
                     )}
                   >
                     <ExternalLink className="size-4" aria-hidden="true" />
-                    Open live dashboard
+                    Open dashboard
                     <span className="sr-only">(opens in a new tab)</span>
                   </a>
                 )}

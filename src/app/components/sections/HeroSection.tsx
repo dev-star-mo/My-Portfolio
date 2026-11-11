@@ -16,8 +16,8 @@ export function HeroSection() {
       id="home"
       tone="light"
       labelledBy="home-title"
-      className="paper-grain overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24 lg:min-h-[calc(100svh-4rem)] lg:py-20"
-      containerClassName="flex h-full flex-col justify-center"
+      className="paper-grain flex flex-col justify-center overflow-hidden py-12 md:py-16 lg:min-h-[calc(100svh-4rem)] lg:py-16"
+      containerClassName="w-full"
     >
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
         <motion.div
@@ -42,7 +42,7 @@ export function HeroSection() {
           </p>
 
           <p className="mt-5 font-mono text-sm tracking-wide text-primary">
-            {profile.roles.join(" · ")}
+            {profile.heroRoles.join(" · ")}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -11,7 +11,7 @@ export interface ExternalLinks {
 export interface ProjectItem {
   id: string;
   title: string;
-  subtitleBadge: string; // e.g., "Hackathon Winner", "Commercial Deployment Highlight", "SAMPLE BI CASE STUDY (DEMONSTRATION)"
+  subtitleBadge: string; // e.g., "Hackathon Entry", "Commercial Architecture Highlight", "SAMPLE BI CASE STUDY (DEMONSTRATION)"
   primaryCategory: DomainCategory;
   secondaryDomains?: DomainCategory[];
   status: ProjectStatus;
@@ -142,7 +142,10 @@ export interface EducationEntry {
 
 export interface Profile {
   name: string;
+  /** Compact roles for footer, header drawer, and About. */
   roles: string[];
+  /** Longer hero-line roles (e.g. expanded IoT wording). */
+  heroRoles: string[];
   coreMessage: string;
   shortBio: string;
   /** Distinct from hero copy — used only in AboutSection. */

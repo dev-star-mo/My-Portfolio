@@ -2,7 +2,12 @@ import type { NavItem, Profile } from '@/types/portfolio';
 
 export const profile: Profile = {
   name: 'Moses Muuo',
-  roles: ['IoT Engineer', 'Software / Backend Developer', 'Data Analyst'],
+  roles: ['IoT Engineer', 'Software Developer', 'Data Analyst'],
+  heroRoles: [
+    'Internet of Things (IoT) Engineer',
+    'Software Developer',
+    'Data Analyst',
+  ],
   coreMessage:
     'I build connected systems, develop the software behind them, and turn operational data into useful insights.',
   shortBio:

@@ -283,11 +283,12 @@ export const architectureNodes: ArchitectureNode[] = [
     shortLabel: 'Dashboard & BI',
     category: 'analytics',
     purpose:
-      'Turns readings into decisions: live operational views for site teams, plus reporting on usage, anomalies and KPIs for management and donors.',
+      'Turns readings into decisions: operational views for site teams, plus reporting on usage and KPIs for management and donors.',
     protocolsAndTech: ['Node.js dashboards', 'React', 'SQL', 'Power BI', 'Python for data analytics'],
     dataIn: 'Current and historical readings, alerts and ERP context.',
-    dataOut: 'Dashboards, KPI reports, anomaly flags such as night-flow leaks, and exportable summaries.',
+    dataOut:
+      'Dashboards, KPI reports, and exportable summaries. The night-flow spike in the projects section is a synthetic illustration of this kind of check, not a client result.',
     failureAndReliabilityNotes:
-      'Stale-data indicators show when a device has stopped reporting, so a quiet chart is never mistaken for a normal one.',
+      'A quiet chart should be distinguishable from a device that has stopped reporting. Individual dashboards differ in how they show that.',
   },
 ];

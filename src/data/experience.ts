@@ -3,7 +3,7 @@ import type { ExperienceEntry } from '@/types/portfolio';
 export const experience: ExperienceEntry = {
   id: 'upande-limited',
   company: 'Upande Limited',
-  role: 'IoT / Backend Engineer',
+  role: 'IoT / Backend Engineer and Data Analyst',
   period: 'Feb 2023 – Dec 2025',
   location: 'Nairobi, Kenya',
   summary:

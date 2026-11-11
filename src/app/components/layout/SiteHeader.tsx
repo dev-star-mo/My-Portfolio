@@ -98,7 +98,7 @@ export function SiteHeader() {
               {profile.name}
             </span>
             <span className="hidden truncate font-mono text-[11px] tracking-wide text-muted-foreground sm:block">
-              IoT · Backend · Data
+              IoT · Software · Data
             </span>
           </span>
         </a>

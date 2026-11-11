@@ -93,7 +93,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
             {project.title.replace(" (Wangari Maathai Foundation Hackathon)", "")}
           </h3>
           <p className="mt-2 font-mono text-xs tracking-wide text-primary">
-            Wangari Maathai Foundation Hackathon Winner
+            Wangari Maathai Foundation Hackathon
           </p>
           <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-muted-foreground">
             {project.contextProblem}
@@ -125,7 +125,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
                 )}
               >
                 <ExternalLink className="size-4" aria-hidden="true" />
-                Live dashboard
+                Dashboard
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             )}
@@ -237,7 +237,7 @@ export function ProjectCard({ project, onOpen, featured = false }: ProjectCardPr
               href={project.links.liveDemo}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} live dashboard (opens in a new tab)`}
+              aria-label={`${project.title} dashboard (opens in a new tab)`}
               className={cn(
                 "grid size-10 place-items-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                 focusRing,
