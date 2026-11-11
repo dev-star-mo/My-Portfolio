@@ -44,46 +44,56 @@ export const featuredProjects: ProjectItem[] = [
     },
   },
   {
-    id: 'ble-tpms',
-    title: 'BLE Tire Pressure Monitoring System (TPMS)',
-    subtitleBadge: 'Embedded Prototype',
-    primaryCategory: 'iot',
+    id: 'fuzzy-factory',
+    title: 'Fuzzy Factory: Marketing Funnel & Traffic Performance Analytics',
+    subtitleBadge: 'Ke Data Lab · BI Final Project',
+    primaryCategory: 'analytics',
     status: 'completed',
     contextProblem:
-      'Drivers rarely remember to check their tire pressure, and driving on underinflated tires is dangerous: it can lead to accidents and tire damage that goes unnoticed until it is too late.',
+      'An e-commerce business tracked website traffic and orders in raw tables but could not answer marketing-channel, conversion-funnel or product-return questions without writing complex multi-table joins for every query.',
     roleContribution:
-      'Personal project: designed the sensor PCB, wrote the ESP-IDF firmware in C++, and designed the dashboard display in Wokwi.',
+      'Final project for the Ke Data Lab Business Intelligence with SQL and Power BI course: modelled a session-grain hub-and-spoke schema in SQL Server, engineered fact tables and DAX measures, and built an interactive Power BI Desktop report.',
     solutionArchitecture:
-      'A Bluetooth Low Energy sensor fitted on the tire valve captures pressure and transmits it to a small OLED display on the dashboard, so drivers can see their tire pressure in real time.',
-    architectureFlow: ['Valve-mounted pressure sensor', 'BLE transmission', 'OLED dashboard display'],
-    techStack: ['C++ (ESP-IDF)', 'BLE', 'PCB Design', 'Wokwi (OLED Display)'],
+      'Raw website sessions, pageviews, orders and refunds were reshaped into fact_sessions and related funnel / traffic / product-performance tables. Marketing channels were normalised from UTM fields, pageviews were pivoted into session milestones, and Power BI pages cover executive summary, ad performance, return rate and conversion funnel.',
+    architectureFlow: [
+      'Raw session & order tables',
+      'T-SQL fact modelling',
+      'DAX measures',
+      'Power BI dashboards',
+    ],
+    techStack: ['SQL Server (T-SQL)', 'Power BI', 'DAX', 'Star / hub-spoke modelling'],
     outcomeEvidence:
-      'Embedded prototype covering sensor firmware, BLE transmission, PCB design and the in-car display design.',
+      'Ke Data Lab BI final project with SQL engineering, DAX measures and multi-page Power BI report. Source is on GitHub.',
+    links: {
+      github: 'https://github.com/dev-star-mo/Fuzzy_Factory',
+    },
   },
   {
-    id: 'iot-ingestion-erp-pipeline',
-    title: 'Multi-Site IoT Telemetry Ingestion & ERP Integration Pipeline',
-    subtitleBadge: 'Commercial Architecture Highlight',
-    primaryCategory: 'iot',
-    secondaryDomains: ['backend'],
-    status: 'completed',
+    id: 'angani-air-analysis',
+    title: 'Angani Air: Loyalty Campaign Customer Analysis',
+    subtitleBadge: 'Ke Data Lab · Python · In Progress',
+    primaryCategory: 'analytics',
+    status: 'in-progress',
     contextProblem:
-      'Clients across water, agriculture and cold-chain operations needed sensor data from many remote sites turned into dashboards, alerts and ERP records, without manual readings.',
+      'Angani Air (a fictional African airline) ran a 2018 loyalty promotion that drove many new sign-ups. Management wanted to know whether the campaign changed customer behaviour and where to focus future loyalty investment.',
     roleContribution:
-      'As IoT / Backend Engineer at Upande Limited, designed and implemented end-to-end sensor systems across 20+ sites and managed the data pipeline from sensor deployment to real-time dashboards: Node.js services decoding device uplinks, UDP control of RS485-Modbus pump controllers, and Frappe / ERPNext API integration for reporting.',
+      'Ke Data Lab Python for Data Analytics course project: cleaned and merged loyalty and flight-activity data, engineered customer-level features, built like-for-like campaign comparison tables, and completed the first round of exploratory analysis.',
     solutionArchitecture:
-      'LoRaWAN and NB-IoT uplinks (plus UDP packets from GPS/GPRS trackers) are decoded and processed by Node.js services. Processed readings drive real-time and historical dashboards and SMS threshold alerts, and are synced to Frappe / ERPNext through its APIs. For one Amref WaSH site, a wireless float switch talks over UDP to an RS485-Modbus device that switches the pump on or off based on tank level.',
+      'Three CSVs (loyalty history, flight activity, calendar) are audited and cleaned in pandas, merged on loyalty number, and enriched with travel, points, membership-lifecycle and CLV features. Promotion vs standard members enrolled in the same months are compared over a fixed follow-up window.',
     architectureFlow: [
-      'LoRaWAN / NB-IoT sensors',
-      'UDP / MQTT uplinks',
-      'Node.js decoders',
-      'Dashboards + SMS alerts',
-      'Frappe / ERPNext API',
+      'CSV loyalty & flight data',
+      'pandas cleaning & merge',
+      'Feature engineering',
+      'Campaign comparison + EDA',
     ],
-    techStack: ['Node.js', 'Node-RED', 'UDP', 'MQTT', 'RS485-Modbus', 'LoRaWAN', 'NB-IoT', 'Frappe / ERPNext'],
+    techStack: ['Python', 'pandas', 'NumPy', 'matplotlib', 'seaborn', 'plotly', 'Jupyter'],
     outcomeEvidence:
-      'Deployed across 20+ sites. On the Amref NB-IoT pilot, the client paid less than on LoRaWAN-powered sites and still received all the data it needed.',
-    relatedExperienceId: 'upande-limited',
+      'Data cleaning, feature engineering, campaign comparison tables and first-pass EDA are complete. Statistical testing and final recommendations are still in progress.',
+    progressNote:
+      'Work in progress: statistical tests, retention/redemption deep-dives and final recommendations remain.',
+    links: {
+      github: 'https://github.com/dev-star-mo/angani_air_analysis',
+    },
   },
   {
     id: 'novadrive-car-rentals',
@@ -149,56 +159,46 @@ export const featuredProjects: ProjectItem[] = [
     },
   },
   {
-    id: 'fuzzy-factory',
-    title: 'Fuzzy Factory: Marketing Funnel & Traffic Performance Analytics',
-    subtitleBadge: 'Ke Data Lab · BI Final Project',
-    primaryCategory: 'analytics',
+    id: 'ble-tpms',
+    title: 'BLE Tire Pressure Monitoring System (TPMS)',
+    subtitleBadge: 'Embedded Prototype',
+    primaryCategory: 'iot',
     status: 'completed',
     contextProblem:
-      'An e-commerce business tracked website traffic and orders in raw tables but could not answer marketing-channel, conversion-funnel or product-return questions without writing complex multi-table joins for every query.',
+      'Drivers rarely remember to check their tire pressure, and driving on underinflated tires is dangerous: it can lead to accidents and tire damage that goes unnoticed until it is too late.',
     roleContribution:
-      'Final project for the Ke Data Lab Business Intelligence with SQL and Power BI course: modelled a session-grain hub-and-spoke schema in SQL Server, engineered fact tables and DAX measures, and built an interactive Power BI Desktop report.',
+      'Personal project: designed the sensor PCB, wrote the ESP-IDF firmware in C++, and designed the dashboard display in Wokwi.',
     solutionArchitecture:
-      'Raw website sessions, pageviews, orders and refunds were reshaped into fact_sessions and related funnel / traffic / product-performance tables. Marketing channels were normalised from UTM fields, pageviews were pivoted into session milestones, and Power BI pages cover executive summary, ad performance, return rate and conversion funnel.',
-    architectureFlow: [
-      'Raw session & order tables',
-      'T-SQL fact modelling',
-      'DAX measures',
-      'Power BI dashboards',
-    ],
-    techStack: ['SQL Server (T-SQL)', 'Power BI', 'DAX', 'Star / hub-spoke modelling'],
+      'A Bluetooth Low Energy sensor fitted on the tire valve captures pressure and transmits it to a small OLED display on the dashboard, so drivers can see their tire pressure in real time.',
+    architectureFlow: ['Valve-mounted pressure sensor', 'BLE transmission', 'OLED dashboard display'],
+    techStack: ['C++ (ESP-IDF)', 'BLE', 'PCB Design', 'Wokwi (OLED Display)'],
     outcomeEvidence:
-      'Ke Data Lab BI final project with SQL engineering, DAX measures and multi-page Power BI report. Source is on GitHub.',
-    links: {
-      github: 'https://github.com/dev-star-mo/Fuzzy_Factory',
-    },
+      'Embedded prototype covering sensor firmware, BLE transmission, PCB design and the in-car display design.',
   },
   {
-    id: 'angani-air-analysis',
-    title: 'Angani Air: Loyalty Campaign Customer Analysis',
-    subtitleBadge: 'Ke Data Lab · Python · In Progress',
-    primaryCategory: 'analytics',
-    status: 'in-progress',
+    id: 'iot-ingestion-erp-pipeline',
+    title: 'Multi-Site IoT Telemetry Ingestion & ERP Integration Pipeline',
+    subtitleBadge: 'Commercial Architecture Highlight',
+    primaryCategory: 'iot',
+    secondaryDomains: ['backend'],
+    status: 'completed',
     contextProblem:
-      'Angani Air (a fictional African airline) ran a 2018 loyalty promotion that drove many new sign-ups. Management wanted to know whether the campaign changed customer behaviour and where to focus future loyalty investment.',
+      'Clients across water, agriculture and cold-chain operations needed sensor data from many remote sites turned into dashboards, alerts and ERP records, without manual readings.',
     roleContribution:
-      'Ke Data Lab Python for Data Analytics course project: cleaned and merged loyalty and flight-activity data, engineered customer-level features, built like-for-like campaign comparison tables, and completed the first round of exploratory analysis.',
+      'As IoT / Backend Engineer at Upande Limited, designed and implemented end-to-end sensor systems across 20+ sites and managed the data pipeline from sensor deployment to real-time dashboards: Node.js services decoding device uplinks, UDP control of RS485-Modbus pump controllers, and Frappe / ERPNext API integration for reporting.',
     solutionArchitecture:
-      'Three CSVs (loyalty history, flight activity, calendar) are audited and cleaned in pandas, merged on loyalty number, and enriched with travel, points, membership-lifecycle and CLV features. Promotion vs standard members enrolled in the same months are compared over a fixed follow-up window.',
+      'LoRaWAN and NB-IoT uplinks (plus UDP packets from GPS/GPRS trackers) are decoded and processed by Node.js services. Processed readings drive real-time and historical dashboards and SMS threshold alerts, and are synced to Frappe / ERPNext through its APIs. For one Amref WaSH site, a wireless float switch talks over UDP to an RS485-Modbus device that switches the pump on or off based on tank level.',
     architectureFlow: [
-      'CSV loyalty & flight data',
-      'pandas cleaning & merge',
-      'Feature engineering',
-      'Campaign comparison + EDA',
+      'LoRaWAN / NB-IoT sensors',
+      'UDP / MQTT uplinks',
+      'Node.js decoders',
+      'Dashboards + SMS alerts',
+      'Frappe / ERPNext API',
     ],
-    techStack: ['Python', 'pandas', 'NumPy', 'matplotlib', 'seaborn', 'plotly', 'Jupyter'],
+    techStack: ['Node.js', 'Node-RED', 'UDP', 'MQTT', 'RS485-Modbus', 'LoRaWAN', 'NB-IoT', 'Frappe / ERPNext'],
     outcomeEvidence:
-      'Data cleaning, feature engineering, campaign comparison tables and first-pass EDA are complete. Statistical testing and final recommendations are still in progress.',
-    progressNote:
-      'Work in progress: statistical tests, retention/redemption deep-dives and final recommendations remain.',
-    links: {
-      github: 'https://github.com/dev-star-mo/angani_air_analysis',
-    },
+      'Deployed across 20+ sites. On the Amref NB-IoT pilot, the client paid less than on LoRaWAN-powered sites and still received all the data it needed.',
+    relatedExperienceId: 'upande-limited',
   },
 ];
 
